@@ -1,0 +1,7 @@
+*.mat
+*.csv
+*.zip
+*.gdf
+*.edf
+*.event
+*.npy
