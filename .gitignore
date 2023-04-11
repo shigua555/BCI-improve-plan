@@ -5,3 +5,12 @@
 *.edf
 *.event
 *.npy
+*.mlx
+*.fig
+*.mlapp
+*.mdl
+*.slx
+*.mdlp
+*.slxp
+*.sldd
+*.p
