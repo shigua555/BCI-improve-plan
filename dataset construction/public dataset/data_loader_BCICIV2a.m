@@ -75,7 +75,7 @@ for index=3:length(file_eeg_signal)
     end
 end
 
-data_type = 2;   % data_type 表示需要的数据类型，1表示within-subject, 2表示cross-subject
+data_type = 1;   % data_type 表示需要的数据类型，1表示within-subject, 2表示cross-subject
 data_spalit_rate = 0.7;  % 训练集和测试集比例，默认7：3
 trainset_num = 7;  testset_num = 2; % 训练集和测试集所包含受试者的数量
 
