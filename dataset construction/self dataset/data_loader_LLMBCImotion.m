@@ -4,7 +4,7 @@ root_dir = 'E:\研究工作\BCI-improve-plan\dataset construction\self dataset\E
 file_name_signal = dir(root_dir);
 load('EEG_bandpass.mat'); %1-40HZ的带通滤波器参数设置，后续处理并未添加
 
-data_type = 2;   % data_type 表示需要的数据类型，1表示within-subject, 2表示cross-subject
+data_type = 1;   % data_type 表示需要的数据类型，1表示within-subject, 2表示cross-subject
 data_spalit_rate = 0.7;  % 训练集和测试集比例，默认7：3
 trainset_num = 7;  testset_num = 3; % 训练集和测试集所包含受试者的数量
 

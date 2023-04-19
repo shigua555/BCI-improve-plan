@@ -1,23 +1,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Description:  This is the demo script to estimate the spectrum of an
-%               EEG signal based on the AR model and using the Yule-Walker method.
-%
-% Note:         This script is a supplementary file of Chapter6 in the book 
-%               "EEG Signal Processing and Feature Extraction" (Springer)
-%                                          
-% Author:       ZHANG Zhiguo, zgzhang@szu.edu.cn
-%               School of Biomedical Engineering, Shenzhen University, 
-%               Shenzhen, China
-%               Jan 2019 
+%               EEG signal based on the AR model and using the Yule-Walker method. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% load data and define parameters
 clear all; clc;
 
-load data_eeg.mat
-% data_eeg.mat contains 2 variables
+load('E:\研究工作\BCI-improve-plan\dataset construction\self dataset\LLMBCImotion.mat')
+
 %   - x: the EEG signal (with eyes-closed)
-%   - Fs: the sampling rate (Fs = 160Hz)
+%   - Fs: the sampling rate
+
+choose_num = 1; choose_movement = 2; choose_channle = 17; % 或者17（C3和C4通道）
+x = s_train(choose_num).eegdata{choose_movement,1}(:,choose_channle);
+Fs = 250;
 
 N = length(x); % the number of samples (N=480)
 x = detrend(x); % remove the low-frequency trend from EEG
@@ -35,7 +31,7 @@ p3 = 50;
 [P_ar_3,f] = pyulear(x,p3,nfft,Fs);
 
 %% display spectral estimates
-f_lim = f((f>0)&(f<=50)); % specify the frequency range to be shown
+f_lim = f((f>0)&(f<=40)); % specify the frequency range to be shown
 
 figure('units','normalized','position',[0.1    0.3    0.8    0.5])
 subplot(1,2,1)

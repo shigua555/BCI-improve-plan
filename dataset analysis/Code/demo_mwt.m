@@ -1,29 +1,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Description:  This is the demo script to calculate the continuous wavelet
 %               transform (CWT) of a VEP signal with the Morlet wavelet basis.
-%
-% Note:         This script is a supplementary file of Chapter6 in the book 
-%               "EEG Signal Processing and Feature Extraction" (Springer)
-%                                          
-% Author:       ZHANG Zhiguo, zgzhang@szu.edu.cn
-%               School of Biomedical Engineering, Shenzhen University, 
-%               Shenzhen, China
-%               Jan 2019 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% load data and define parameters
 clear all; clc;
 
-load data_vep.mat
-% data_vep.mat contains 3 variables
-%   - x: the VEP signal (512 time points, averaged from multiple trials)
-%   - Fs: the sampling rate (Fs = 250Hz)
-%   - t: the time indices (256 pre-stimulus samples and 256 post-stimulus samples, with a time interval of 1/Fs)
-%   The original data are from https://vis.caltech.edu/~rodri/data/cg_o1t.asc
-%   Please see https://vis.caltech.edu/~rodri/data.htm for more details.
+load('E:\研究工作\BCI-improve-plan\dataset construction\self dataset\LLMBCImotion.mat')
+
+choose_num = 1; choose_movement = 2; choose_channle = 17; % 或者17（C3和C4通道）
+x = s_train(choose_num).eegdata{choose_movement,1}(:,choose_channle);
+
+Fs = 250;
+t = 3/750:3/750:3;
 
 N = numel(x); % the number of time points
-x = x - mean(x(t<0)); % baseline corrction for averaged VEP
 
 %% perform time-frequency analysis using MWT
 nfft = 2^nextpow2(N); % the number of FFT points
@@ -51,9 +41,9 @@ for n_omega=1:numel(omega)
 end
 
 %% display MWT results with different parameters
-f_lim = [min(f(f>0)), 30]; % specify the frequency range to be shown (remove 0Hz)
+f_lim = [min(f(f>0)), 15]; % specify the frequency range to be shown (remove 0Hz)
 f_idx = find((f<=f_lim(2))&(f>=f_lim(1)));
-t_lim = [-0.2, 1]; % specify the time range to be shown
+t_lim = [0, 3]; % specify the time range to be shown
 t_idx = find((t<=t_lim(2))&(t>=t_lim(1)));
 
 figure('units','normalized','position',[0.1    0.15    0.8    0.7])
