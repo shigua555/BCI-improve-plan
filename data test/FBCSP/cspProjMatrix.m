@@ -22,7 +22,6 @@ for k=1:classNo    %对每一类进行训练
             x(:,:,i) = x(:,:,i);
         end
         R=x(:,:,i)'*x(:,:,i); 
-        %R=cov(x(:,:,i)); 
         R=R/trace(R);
         if y(i)==k   %当前类
             R_a=R_a+R;

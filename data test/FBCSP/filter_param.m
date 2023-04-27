@@ -3,10 +3,8 @@
 %   low        高通滤波参数设置
 %   high       低通滤波参数设置
 %   sampleRate          采样率
-%   filterorder  butterworth滤波器阶数
 %返回：filterdata       滤波后EEG数据
-function filterdata=filter_param(data,low,high,sampleRate,filterorder)
+function filterdata=filter_param(data,low,high,sampleRate)
 %% 设置滤波参数
- filtercutoff = [low*2/sampleRate high*2/sampleRate]; 
- [filterParamB, filterParamA] = butter(filterorder,filtercutoff);
- filterdata= filter( filterParamB, filterParamA, data);
+ Hd = bandpass_filter(low,high,sampleRate);
+ filterdata= filter(Hd.Numerator,1,data);

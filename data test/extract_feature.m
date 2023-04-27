@@ -39,7 +39,7 @@ for i=1:length(X)
                 [Feture_candidates(i).TFFname,Feture_candidates(i).TFF] = Timefrequency_Domain(EEG(i).data,EEG(i).sr,Freq_Band);
                 t_freq_candidate_cost = toc;
                 disp(['频域特征计算完毕，耗时(秒)： ',num2str(t_freq_candidate_cost)]);
-            case 3  %空域特征主要提取：
+            case 3  %空域特征主要提取：各频带不同类之间的CSP特征以及HDCA特征
                 disp(['空域特征计算中...']);
                 tic;
                 [Feture_candidates(i).SDname,Feture_candidates(i).SD] = Spatial_Domain(EEG(i).data);
